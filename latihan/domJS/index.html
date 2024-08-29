@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .ada, .jabR {
+            display: none;
+        }
+    </style>
+    <title>Dom Js</title>
+</head>
+<body>
+    <form action="">
+        <div class="rekomen">
+            <h3>Ada Rekomendasi?*</h3>
+            <select name="rekomen" id="rekomen" onchange="changeLabel(this)">
+                <option disabled hidden selected>Pilihan</option>
+                <option value="Ada">Ada</option>
+                <option value="Tidak">Tidak</option>
+            </select>
+            <div class="ada">
+                <div class="nameR">
+                    <label for="">Nama Perekomendasi</label>
+                    <input type="text">
+                </div>
+                <div class="kategReko">
+                    <select name="kategR" id="kategR" onchange="ubahKategori(this)">
+                        <option disabled hidden selected>Pilihan</option>
+                        <option value="bri">Pekerja BRI</option>
+                        <option value="purnabakti">Purnabakti</option>
+                    </select>
+                </div>
+                <div class="id-pegawai">
+                    <label for="">Nomor ID Pegawai/KTA/PN/MP</label>
+                    <input type="text">
+                </div>
+                <div class="jabR">
+                    <label for="jabR">Jabatan Rekomendasi</label>
+                    <input type="text" name="" id="">
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        function changeLabel(e) {
+            if (e.value === "Ada") {
+                document.querySelector('.ada').style.display = 'block';
+            } else {
+                document.querySelector('.ada').style.display = 'none';
+            }
+        }
+
+        function ubahKategori(e) {
+            if (e.value === "bri") {
+                document.querySelector('.jabR').style.display = 'block';
+            } else {
+                document.querySelector('.jabR').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

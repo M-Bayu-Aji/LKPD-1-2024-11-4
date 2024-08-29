@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown Alert</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        margin: 0;
+      }
+      #alertBox {
+        display: block;
+        padding: 10px;
+        margin: 1rem 2rem;
+        font-size: 2rem;
+        font-weight: 500;
+        border-radius: 4px;
+      }
+      .count-down {
+        text-align: center;
+        width: 300px;
+        padding: 1rem 1rem;
+        margin: 2rem 3rem;
+        width: 500px;
+        border: 1px solid black;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 0.3rem;
+        width: 100%;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .start:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+        opacity: 0.8;
+      }
+      h2 {
+        margin: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="count_down" class="count-down">
+      <h2>Hitung Mundur</h2>
+      <div id="alertBox"></div>
+      <button class="start" onclick="showCountdownAlert()">Mulai</button>
+      <button onclick="stopCountdownAlert()">Berhenti</button>
+    </div>
+
+    <script>
+      let intervalId;
+      let isPaused = false;
+      let remainingTime = 10;
+
+      window.onload = function() {
+        const alertBox = document.getElementById("alertBox");
+        alertBox.textContent = `${remainingTime}`;
+        alertBox.style.color = "black";
+      }
+
+      function showCountdownAlert() {
+        const alertBox = document.getElementById("alertBox");
+        const startButton = document.querySelector(".start");
+        
+        alertBox.style.color = "black";
+        // Clear any existing interval before starting a new one
+        clearInterval(intervalId);
+
+        // Disable the start button
+        startButton.disabled = true;
+        startButton.classList.add("start:disabled");
+
+        if (isPaused) {
+          isPaused = false;
+        }
+
+        intervalId = setInterval(() => {
+          if (isPaused) {
+            clearInterval(intervalId);
+            return;
+          }
+
+          remainingTime--;
+          if (remainingTime <= 0) {
+            clearInterval(intervalId);
+            alertBox.innerHTML = "<p style='color:red;'>Waktu Habis</p>"
+            alertBox.style.fontWeight = "Bold";
+            startButton.disabled = false; // Re-enable the start button
+            startButton.classList.remove("start:disabled");
+            remainingTime = 11; // Reset time after countdown ends
+          } else {
+            alertBox.textContent = `${remainingTime}`;
+          }
+        }, 1000);
+      }
+
+      function stopCountdownAlert() {
+        const startButton = document.querySelector(".start");
+        clearInterval(intervalId);
+        isPaused = true; // Set flag paused
+        console.log("Timer dihentikan, waktu tersisa:", remainingTime);
+        startButton.disabled = false; // Re-enable the start button
+        startButton.classList.remove("start:disabled");
+      }
+    </script>
+  </body>
+</html>

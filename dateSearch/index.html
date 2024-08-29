@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Date</title>
+    <link rel="stylesheet" href="s.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Pilih Tanggal</h1>
+      <form id="dateForm" onsubmit="Submit(event)">
+        <input type="date" id="dateInput" />
+        <button type="submit">Submit</button>
+      </form>
+      <div id="output">Tidak mencari data...</div>
+    </div>
+    <script>
+      function Submit(event) {
+        event.preventDefault(); // Mencegah form dari pengiriman data
+
+        const date = document.getElementById("dateInput").value;
+
+        if (date) {
+          const tanggalObj = new Date(date);
+          const tanggal = tanggalObj.getDate();
+          const bulan = tanggalObj.getMonth() + 1;
+          const tahun = tanggalObj.getFullYear();
+
+          const Bulan = [
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember",
+          ];
+
+          const namaDbulan = Bulan[bulan - 1]; // Mengakses nama bulan yang benar
+          const hasil = `${tanggal} ${namaDbulan} ${tahun}`;
+          const output = document.querySelector("#output");
+          output.innerText = hasil;
+        } else {
+          document.querySelector("#output").innerText = "Isi tanggal nya!";
+        }
+      }
+    </script>
+  </body>
+</html>
